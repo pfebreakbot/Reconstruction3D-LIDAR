@@ -1,0 +1,5 @@
+<launch>
+	<node pkg="pfebreakbot" name="MPP_ROS" type="MPP_ROS" />
+	<node pkg="pfebreakbot" name="LIDAR_ROS" type="LIDAR_ROS" />
+	<node pkg="pfebreakbot" name="SERVO_ROS" type="SERVO_ROS" />
+</launch>
