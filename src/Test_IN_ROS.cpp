@@ -1,3 +1,10 @@
+/**
+ * \file Test_IN_ROS.cpp
+ * \brief ROS node to test and display services' calls to Lidar, MPP and SERVO nodes
+ * \author pfebreakbot
+ * \version 0.1
+ * \date 4 January 2016
+ */
 #include "ros/ros.h"
 #include "pfebreakbot/LIDAR.h"
 #include "pfebreakbot/MPP.h"
@@ -43,7 +50,6 @@ int main(int argc, char **argv)
             ROS_INFO("Successed to call SERVO service");
         else
             ROS_ERROR("Failed to call SERVO service");
-       //usleep(10000);
     }
     return 0;
 }

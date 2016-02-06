@@ -1,3 +1,10 @@
+/**
+ * \file SERVO_ROS.cpp
+ * \brief ROS node to initialize and push servomotor to an angle in rad
+ * \author pfebreakbot
+ * \version 0.1
+ * \date 4 January 2016
+ */
 #include "ros/ros.h"
 #include "std_msgs/Float32.h"
 #include "pfebreakbot/SERVO.h"
@@ -19,13 +26,6 @@ class Command
 
     bool operator()(pfebreakbot::SERVO::Request& req, pfebreakbot::SERVO::Response& res)
     {
-        //-60   60
-
-        //+90 -> 1.5707963268
-
-        //30  150
-
-        //0  180
         float angle=((req.angle_rad+M_74_to_RAD)*180)/M_PI;
 
         FILE *f1=fopen("/dev/servoblaster","w");

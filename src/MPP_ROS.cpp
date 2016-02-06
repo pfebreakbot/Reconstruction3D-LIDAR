@@ -1,3 +1,11 @@
+/**
+ * \file MPP_ROS.cpp
+ * \brief ROS node to initialize and step the step motor
+ * \author pfebreakbot
+ * \version 0.1
+ * \date 4 January 2016
+ */
+
 #include "ros/ros.h"
 #include "std_msgs/Float32.h"
 #include "pfebreakbot/MPP.h"

@@ -1,3 +1,10 @@
+/**
+ * \file Test_VUE.cpp
+ * \brief ROS node to test VUE_ROS.cpp
+ * \author pfebreakbot
+ * \version 0.1
+ * \date 4 January 2016
+ */
 #include "ros/ros.h"
 #include "std_msgs/Float32.h"
 
@@ -21,15 +28,14 @@ int main(int argc, char **argv)
     {
         msg.data = i;
         publisherSERVO.publish(msg);
-        //loop_rate.sleep();
 
         for(float j=0; j<6.28;j+=0.0157)
         {
             msg.data = j;
             publisherMPP.publish(msg);
-            //loop_rate.sleep();
 
-            msg.data=(plusmoins)?1.0:1.1;
+            //msg.data=(plusmoins)?1.0:1.1;
+            msg.data=1.0;
             plusmoins=!plusmoins;
 
             publisherLIDAR.publish(msg);

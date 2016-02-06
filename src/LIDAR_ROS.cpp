@@ -1,21 +1,55 @@
+/**
+ * \file LIDAR_ROS.cpp
+ * \brief ROS node to initialize and obtain distance from LIDAR-lite v2
+ * \author pfebreakbot
+ * \version 0.1
+ * \date 4 January 2016
+ */
 #include "ros/ros.h"
 #include "std_msgs/Float32.h"
 #include "pfebreakbot/LIDAR.h"
 #include <wiringPi.h>
 #include <wiringPiI2C.h>
 
+
+/*! \class Command
+   * \brief custom service class
+   *
+   *  Class to be called as ROS service and capture a distance
+   */
 class Command
 {
-    int m_fd;
-    ros::Publisher m_publisher;
+    int m_fd; /*!< Id of the I2C communication*/
+    ros::Publisher m_publisher; /*!< reference to the publisher */
 
     public:
+    /*!
+     *  \brief Constructor
+     *
+     *  Command Constructor
+     *
+     *  \param fd : Id of the I2C communication
+     *  \param publisher : reference to the publisher
+     */
     Command(int fd, ros::Publisher publisher)
     {
         m_fd = fd;
         m_publisher = publisher;
 
     }
+
+    /*!
+     *  \fn bool operator()(pfebreakbot::LIDAR::Request& req, pfebreakbot::LIDAR::Response& res)
+     *  \brief operator
+     *
+     *  Interface to a ROS service cf. ROS documentation
+     *  This code send the capture command to the LIDAR
+     *
+     *  \param req : request
+     *  \param res : response
+     *
+     *  \return true if success
+     */
     bool operator()(pfebreakbot::LIDAR::Request& req, pfebreakbot::LIDAR::Response& res)
     {
 
@@ -46,6 +80,12 @@ class Command
     }
 };
 
+/**
+ * \fn int main (int argc, char **argv)
+ * \brief Main which init I2C connection and init ROS node
+ *
+ * \return 0 if success
+ */
 int main(int argc, char **argv)
 {
     ros::init(argc, argv, "LIDAR");
