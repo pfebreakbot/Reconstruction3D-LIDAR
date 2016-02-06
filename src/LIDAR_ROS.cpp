@@ -43,7 +43,7 @@ class Command
      *  \brief operator
      *
      *  Interface to a ROS service cf. ROS documentation
-     *  This code send the capture command to the LIDAR
+     *  This code allow one to send a capture command to the LIDAR
      *
      *  \param req : request
      *  \param res : response

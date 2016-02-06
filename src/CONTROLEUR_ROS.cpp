@@ -12,6 +12,13 @@
 #include "pfebreakbot/SERVO.h"
 #include <unistd.h>
 
+/**
+ * \fn int main (int argc, char **argv)
+ * \brief Main fonction which init ROS node and apply state machine to control the pfebreakbot system
+ *
+ * \return 0 if success
+ */
+
 int main(int argc, char **argv)
 {
     ros::init(argc, argv, "CONTROLEUR_ROS");
@@ -25,12 +32,12 @@ int main(int argc, char **argv)
     pfebreakbot::MPP srvMPP;
     pfebreakbot::SERVO srvSERVO;
 
-    for(float i =0; i< 400 && ros::ok(); i+=1)//pour 0.9
+    for(float i =0; i< 400 && ros::ok(); i+=1)//with 0.9°
     {
         if(clientMPP.call(srvMPP))
         {
 
-            for(float j =-1.0472; j<= 1.0472; j+=0.0174533)//pour 0.9
+            for(float j =-1.0472; j<= 1.0472; j+=0.0174533)//with 0.9°
             {
                 srvSERVO.request.angle_rad=j;
                 if(clientSERVO.call(srvSERVO) == false)

@@ -22,14 +22,31 @@
 #define Step1 26 // Controle des pas
 //#define _debug_
 
+
+
+ /*! \class Command
+   * \brief custom service class
+   *
+   *  Class to be called as ROS service and do a step
+   */
 class Command
 {
-    ros::Publisher m_publisher;
-    int m_direction_mot;
-    int m_precision;
-    float *m_position;
+    ros::Publisher m_publisher; /*!< reference to the publisher*/
+    int m_direction_mot; /*!< direction of the step motor rotation */
+    int m_precision; /*!< definition of a step (full, half, _) */
+    float *m_position; /*!< a theoretical position of the step motor */
 
     public:
+    /*!
+     *  \brief Constructor
+     *
+     *  Command Constructor
+     *
+     *  \param publisher : reference to the publisher
+     *  \param direction_mot : direction of the step motor rotation
+     *  \param precision : definition of a step (full, half, _)
+     *  \param position : a theoretical position of the step motor
+     */
     Command( ros::Publisher publisher,int direction_mot,int precision,float *position)
     {
         m_publisher = publisher;
@@ -38,6 +55,18 @@ class Command
         m_direction_mot = direction_mot;
     }
 
+    /*!
+     *  \fn bool operator()(pfebreakbot::MPP::Request& req, pfebreakbot::MPP::Response& res)
+     *  \brief operator
+     *
+     *  Interface to a ROS service cf. ROS documentation
+     *  This code allow one to send a step command to the step motor
+     *
+     *  \param req : request
+     *  \param res : response
+     *
+     *  \return true if success
+     */
     bool operator()(pfebreakbot::MPP::Request& req, pfebreakbot::MPP::Response& res)
     {
         int delay1=0,delay2=0;
